@@ -14,8 +14,6 @@ const GenerateAssignmentsController  = async (Employee, PreviousAssignment, req,
           prev => prev.email === currentEmployee.email
         );
 
-        console.log(assignments?.length,"assignments")
-
         // Filter potential secret children
         const potentialSecretChildren = availableEmployees.filter(employee => {
           const constraints = [
@@ -78,7 +76,7 @@ const GenerateAssignmentsController  = async (Employee, PreviousAssignment, req,
 
     const employeeData = await Employee.find();
     const previousYearEmployeeData = await PreviousAssignment.find();
-    
+
     if(employeeData?.length > 0 && previousYearEmployeeData?.length > 0) {
       const assignmentsData = generateAssignments(employeeData, previousYearEmployeeData);
       res.status(201).json({assignmentsData, message: "Assignment generated successfully"});
